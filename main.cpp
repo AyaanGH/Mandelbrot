@@ -66,9 +66,7 @@ int main() {
 
     const int height = 90;
     const int width = 200;
-//    SetWindow(width, height);
 
-//    setConsoleWindow(1920,1080);
     setCursorPos(0, 0);
 
     for (int y = 0; y < height; ++y) {
