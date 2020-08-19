@@ -26,11 +26,10 @@ void SetWindow(int Width, int Height) {
     SetConsoleWindowInfo(Handle, TRUE, &Rect);            // Set Window Size 
 }
 
-void setConsoleWindow(int width,int height)
-{
+void setConsoleWindow(int width, int height) {
     HWND hwnd = GetConsoleWindow();
     RECT rect = {500, 500, width, height};
-    MoveWindow(hwnd, rect.left, rect.top, rect.right-rect.left, rect.bottom-rect.top,TRUE);
+    MoveWindow(hwnd, rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top, TRUE);
 }
 
 
@@ -49,17 +48,15 @@ int computeMandelbrot(float real_x, float imaginary_y) {
 
     int iterations = 100;
 
-    for (int i = 0 ; i < iterations ; i++)
-    {
+    for (int i = 0; i < iterations; i++) {
 
         float z_real_squared = z_real * z_real;
         float z_imaginary_squared = z_imaginary * z_imaginary;
-        if(z_real_squared + z_imaginary_squared > 16.0)
-        {
+        if (z_real_squared + z_imaginary_squared > 16.0) {
             return i;
         }
-        z_real = z_real_squared - z_imaginary_squared + real_x ;
-        z_imaginary = 2.0f * z_real *z_imaginary + imaginary_y;
+        z_real = z_real_squared - z_imaginary_squared + real_x;
+        z_imaginary = 2.0f * z_real * z_imaginary + imaginary_y;
 
     }
     return iterations;
@@ -90,29 +87,10 @@ int main() {
 
         }
 
-//            float ca = a;
-//            float cb = b;
-//
-//            int n = 0;
-//            while (n < 100) {
-//                float aabb = a * a - b * b;
-//                float ab = 2 * a * b;
-//                a = aabb + ca;
-//                b = ab + cb;
-//
-//                if (std::abs(a + b) > 16) {
-//                    break;
-//                }
-//                ++n;
-//
-//            }
-//
-//
-//        }
 
         std::cout << '\n';
     }
-//    setCursorPos(0, 0);
+
     return 0;
 }
 
