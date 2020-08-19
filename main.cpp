@@ -1,5 +1,7 @@
 #include <windows.h>
 #include <iostream>
+
+
 //https://docs.microsoft.com/en-us/windows/console/setconsolecursorposition
 void setCursorPos(short x, short y) {
     HANDLE output = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -7,8 +9,8 @@ void setCursorPos(short x, short y) {
     SetConsoleCursorPosition(output, pos);
 
 }
-void SetWindow(int Width, int Height)
-{
+
+void SetWindow(int Width, int Height) {
     _COORD coord;
     coord.X = Width;
     coord.Y = Height;
@@ -36,18 +38,53 @@ float interpolate(int value, int leftMin, int leftMax, int rightMin, int rightMa
 
 int main() {
 
-    const int height = 100;
-    const int width = 100;
+    const int height = 90;
+    const int width = 200;
     SetWindow(width, height);
     setCursorPos(0, 0);
 
 
     for (int y = 0; y < height; ++y) {
-        for (int x = 0; x < width-1; ++x) {
-            std::cout << "#";
+        for (int x = 0; x < width - 1; ++x) {
+
+            float b = interpolate(y, 0, height, -2, 2);
+            float a = interpolate(x, 0, width, -2, 2);
+
+            float ca = a;
+            float cb = b;
+
+            int n = 0;
+
+
+            while (n < 100) {
+                //a^2 - b^2 == aabb
+
+                float aabb = a * a - b * b;
+
+                float ab = 2 * a * b;
+
+                a = aabb + ca;
+
+                b = ab + cb;
+
+                if (std::abs(a + b) > 16) {
+                    break;
+                }
+                ++n;
+
+            }
+
+
+            if (n == 100) {
+                std::cout << "O";
+            } else {
+                std::cout << " ";
+            }
+
         }
-        std::cout << std::endl;
+
+        std::cout << '\n';
     }
-    setCursorPos(0, 0);
+//    setCursorPos(0, 0);
     return 0;
 }
